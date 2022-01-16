@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>头像立体呈现</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .cube {
+            /* 200/3.75=53.333 */
+            width: 53.333vw;
+            height: 53.333vw;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* 100/3.75=26.667 */
+            margin-left: -26.667vw;
+            margin-top: -26.667vw;
+
+            /* ps，为了初始设计的时候能看得更清楚，而已 */
+            /* background: purple; */
+            /* transform: rotateX(-30deg) rotateY(30deg); */
+
+            /* 过渡 */
+            /* transition: all 10s; */
+            /* 让子元素都处于3D空间之中 */
+            transform-style: preserve-3d;
+            /* 调用动画，设置持续时长，无限循环，线性匀速运动 */
+            animation: revolve 10s infinite linear;
+        }
+
+        .cube div {
+            width: 53.333vw;
+            height: 53.333vw;
+            /* 让小div们经过定位后都脱标，能重合在一起，并且是绝对定位，方便后续的排版 */
+            position: absolute;
+            /* 设置边框以及自动内减，防止因边框而撑大整体盒子 */
+            border: 1.333vw solid #000000;
+            box-sizing: border-box;
+        }
+
+        .cube .front {
+            background: url(./images/010xx.jpg);
+            /* 让背景图片被盒子全部包含 */
+            background-size: contain;
+            /* 100/3.75=26.667 */
+            transform: translateZ(26.667vw);
+        }
+
+        .cube .left {
+            background: url(./images/011lsc.jpg);
+            /* 让背景图片被盒子全部包含 */            
+            background-size: contain;         
+            transform: rotateY(-90deg) translateZ(26.667vw);
+        }
+
+        .cube .back {
+            background: url(./images/012swq.jpg);
+            /* 让背景图片被盒子全部包含 */
+            background-size: contain;          
+            transform: rotateY(180deg) translateZ(26.667vw);
+        }
+
+        .cube .right {
+            background: url(./images/013hy.jpg);
+            /* 让背景图片被盒子全部包含 */
+            background-size: contain;          
+            transform: rotateY(90deg) translateZ(26.667vw);
+        }
+
+        .cube .top {
+            background: yellow;            
+            transform: rotateX(90deg) translateZ(26.667vw);
+        }
+
+        .cube .bottom {
+            background: grey;
+            transform: rotateX(-90deg) translateZ(26.667vw);
+        }
+
+        /* 定义动画 */
+        @keyframes revolve {
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        /* 鼠标悬停后，动画播放状态会被暂停 */
+        .cube:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body>
+    <div class="cube">
+        <div class="front"></div>
+        <div class="left"></div>
+        <div class="back"></div>
+        <div class="right"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>        
+    </div>
+</body>
+</html>
